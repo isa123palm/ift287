@@ -12,6 +12,7 @@ public class Produits {
     }
 
     public void ajouter(Produit p) throws Exception {
+        
         if (em.find(Produit.class, p.getNom()) != null)
             throw new Exception("Ce produit existe déjà.");
         em.persist(p);

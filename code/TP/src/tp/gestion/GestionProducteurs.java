@@ -14,24 +14,39 @@ public class GestionProducteurs {
         this.producteurs = new Producteurs(em);
     }
 
-    public void ajouter(String nom, String courriel, int nbEmp, String adresse) throws Exception {
-        em.getTransaction().begin();
-        producteurs.ajouter(new Producteur(nom, courriel, nbEmp, adresse));
-        em.getTransaction().commit();
+    public void ajouterProducteur(String nom, String courriel, int nbEmp, String adresse) throws Exception {
+        try {
+            em.getTransaction().begin();
+            producteurs.ajouter(new Producteur(nom, courriel, nbEmp, adresse));
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 
-    public void afficher(String nom) throws Exception {
+    public void afficherProducteur(String nom) throws Exception {
+        try {
         Producteur p = producteurs.chercher(nom);
         if (p == null) throw new Exception("Producteur introuvable");
         System.out.println("Nom: " + p.getNom());
         System.out.println("Courriel: " + p.getCourriel());
-        System.out.println("Adresse: " + p.getAdresse());
-        System.out.println("Nb employés: " + p.getNbEmployes());
+            System.out.println("Adresse: " + p.getAdresse());
+            System.out.println("Nb employés: " + p.getNbEmployes());
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 
-    public void supprimer(String nom) throws Exception {
-        em.getTransaction().begin();
-        producteurs.supprimer(nom);
-        em.getTransaction().commit();
+    public void supprimerProducteur(String nom) throws Exception {
+        try {
+            em.getTransaction().begin();
+            producteurs.supprimer(nom);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 }

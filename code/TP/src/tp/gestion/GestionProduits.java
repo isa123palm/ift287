@@ -19,14 +19,20 @@ public class GestionProduits {
     }
 
     public void ajouterProduit(String nom, double prix, double cout, String categorie, String nomProducteur) throws Exception {
+        try {
         em.getTransaction().begin();
         Producteur prod = producteurs.chercher(nomProducteur);
         if (prod == null) throw new Exception("Producteur introuvable.");
         produits.ajouter(new Produit(nom, prix, cout, categorie, prod));
-        em.getTransaction().commit();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 
-    public void afficher(String nom) throws Exception {
+    public void afficherProduit(String nom) throws Exception {
+        try {
         Produit p = produits.chercher(nom);
         if (p == null) throw new Exception("Produit introuvable");
         System.out.println("Nom: " + p.getNom());
@@ -34,11 +40,21 @@ public class GestionProduits {
         System.out.println("Coût: " + p.getCout());
         System.out.println("Catégorie: " + p.getCategorie());
         System.out.println("Producteur: " + p.getProducteur().getNom());
+        
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 
-    public void supprimer(String nom) throws Exception {
+    public void supprimerProduit(String nom) throws Exception {
+        try {
         em.getTransaction().begin();
         produits.supprimer(nom);
         em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 }
