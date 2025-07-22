@@ -1,0 +1,20 @@
+ajouterProducteur BellaJam bella@jam.ca 7 123 rue des fruits
+ajouterProduit ConfiMangue 7.99 3.50 tropical BellaJam
+ajouterFournisseur MangoInc mango@inc.ca 123 rue Tropic
+ajouterPointDeVente MarcheBerri contact@berri.ca 789 rue Marche
+
+fabriquerProduit ConfiMangue MangoInc
+vendreProduit ConfiMangue MarcheBerri
+
+afficherProducteur BellaJam
+afficherProduit ConfiMangue
+afficherFournisseur MangoInc
+afficherPointDeVente MarcheBerri
+
+retirerProduitFournisseur ConfiMangue MangoInc
+retirerProduitPointDeVente ConfiMangue MarcheBerri
+
+supprimerProduit ConfiMangue
+supprimerFournisseur MangoInc
+supprimerPointDeVente MarcheBerri
+supprimerProducteur BellaJam
