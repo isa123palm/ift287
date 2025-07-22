@@ -18,7 +18,7 @@ public class GestionProduits {
         this.producteurs = new Producteurs(em);
     }
 
-    public void ajouter(String nom, double prix, double cout, String categorie, String nomProducteur) throws Exception {
+    public void ajouterProduit(String nom, double prix, double cout, String categorie, String nomProducteur) throws Exception {
         em.getTransaction().begin();
         Producteur prod = producteurs.chercher(nomProducteur);
         if (prod == null) throw new Exception("Producteur introuvable.");
