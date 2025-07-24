@@ -17,21 +17,16 @@ public class Main {
 
 // Delete first if exists (clean reset)
         try {
-            gprod.supprimer("Confi-Mangue");  // Suppresses product first
-            gp.supprimer("BellaJam");         // Then deletes producer
+            gprod.supprimerProduit("Confi-Mangue");  // Suppresses product first
+            gp.supprimerProducteur("BellaJam");         // Then deletes producer
         } catch (Exception e) {
             System.out.println("warning :  " + e.getMessage());  // Already deleted is fine
         }
 
 // re-add
         try {
-            gp.ajouter("BellaJam", "bella@jam.ca", 7, "123 rue des fruits");
-            gprod.ajouter("Confi-Mangue", 8.99, 3.25, "mangue", "BellaJam");
-            gprod.afficher("Confi-Mangue");
+            gp.ajouterProducteur("BellaJam", "bella@jam.ca", 7, "123 rue des fruits");
+            gprod.ajouterProduit("Confi-Mangue", 8.99, 3.25, "mangue", "BellaJam");
+            gprod.afficherProduit("Confi-Mangue");
         } catch (Exception e) {
             System.out.println("error : " + e.getMessage());
-        }
-
-        cx.fermer();
-    }
-}

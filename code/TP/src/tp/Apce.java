@@ -46,27 +46,27 @@ public class Apce {
 
         try {
             switch (commande) {
-                case "ajouterProducteur" -> gestionProducteurs.ajouter(
+                case "ajouterProducteur" -> gestionProducteurs.ajouterProducteur(
                         st.nextToken(), st.nextToken(), Integer.parseInt(st.nextToken()), lireChaineAvecEspaces(st));
 
-                case "afficherProducteur" -> gestionProducteurs.afficher(st.nextToken());
+                case "afficherProducteur" -> gestionProducteurs.afficherProducteur(st.nextToken());
 
-                case "supprimerProducteur" -> gestionProducteurs.supprimer(st.nextToken());
+                case "supprimerProducteur" -> gestionProducteurs.supprimerProducteur(st.nextToken());
 
-                case "ajouterProduit" -> gestionProduits.ajouter(
+                case "ajouterProduit" -> gestionProduits.ajouterProduit(
                         st.nextToken(), Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken()),
                         st.nextToken(), st.nextToken());
 
-                case "afficherProduit" -> gestionProduits.afficher(st.nextToken());
+                case "afficherProduit" -> gestionProduits.afficherProduit(st.nextToken());
 
-                case "supprimerProduit" -> gestionProduits.supprimer(st.nextToken());
+                case "supprimerProduit" -> gestionProduits.supprimerProduit(st.nextToken());
 
-                case "ajouterFournisseur" -> gestionFournisseurs.ajouter(
+                case "ajouterFournisseur" -> gestionFournisseurs.ajouterFournisseur(
                         st.nextToken(), st.nextToken(), lireChaineAvecEspaces(st));
 
-                case "afficherFournisseur" -> gestionFournisseurs.afficher(st.nextToken());
+                case "afficherFournisseur" -> gestionFournisseurs.afficherFournisseur(st.nextToken());
 
-                case "supprimerFournisseur" -> gestionFournisseurs.supprimer(st.nextToken());
+                case "supprimerFournisseur" -> gestionFournisseurs.supprimerFournisseur(st.nextToken());
 
                 case "fabriquerProduit" -> gestionFournisseurs.fabriquerProduit(
                         st.nextToken(), st.nextToken());
@@ -74,12 +74,12 @@ public class Apce {
                 case "retirerProduitFournisseur" -> gestionFournisseurs.retirerProduit(
                         st.nextToken(), st.nextToken());
 
-                case "ajouterPointDeVente" -> gestionPointsDeVente.ajouter(
+                case "ajouterPointDeVente" -> gestionPointsDeVente.ajouterPointDeVente(
                         st.nextToken(), st.nextToken(), lireChaineAvecEspaces(st));
 
-                case "afficherPointDeVente" -> gestionPointsDeVente.afficher(st.nextToken());
+                case "afficherPointDeVente" -> gestionPointsDeVente.afficherPointDeVente(st.nextToken());
 
-                case "supprimerPointDeVente" -> gestionPointsDeVente.supprimer(st.nextToken());
+                case "supprimerPointDeVente" -> gestionPointsDeVente.supprimerPointDeVente(st.nextToken());
 
                 case "vendreProduit" -> gestionPointsDeVente.vendreProduit(
                         st.nextToken(), st.nextToken());
@@ -101,9 +101,4 @@ public class Apce {
     private static String lireChaineAvecEspaces(StringTokenizer st) {
         StringBuilder sb = new StringBuilder();
         while (st.hasMoreTokens()) {
-            sb.append(st.nextToken());
-            if (st.hasMoreTokens()) sb.append(" ");
-        }
-        return sb.toString();
-    }
-}
+            sb.appe
