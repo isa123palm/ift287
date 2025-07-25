@@ -20,9 +20,12 @@ public class GestionProduits {
 
     public void ajouterProduit(String nom, double prix, double cout, String categorie, String nomProducteur) throws Exception {
         try {
-        em.getTransaction().begin();
-        Producteur prod = producteurs.chercher(nomProducteur);
-        if (prod == null) throw new Exception("Producteur introuvable.");
+            // Démarrer la transaction
+            em.getTransaction().begin();
+            // Vérifier si le producteur existe
+            Producteur prod = producteurs.chercher(nomProducteur);
+            if (prod == null) throw new Exception("Producteur introuvable.");
+            // Ajouter le produit
         produits.ajouter(new Produit(nom, prix, cout, categorie, prod));
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -33,9 +36,11 @@ public class GestionProduits {
 
     public void afficherProduit(String nom) throws Exception {
         try {
-        Produit p = produits.chercher(nom);
-        if (p == null) throw new Exception("Produit introuvable");
-        System.out.println("Nom: " + p.getNom());
+            // Chercher le produit
+            Produit p = produits.chercher(nom);
+            if (p == null) throw new Exception("Produit introuvable");
+            // Afficher les informations du produit
+            System.out.println("Nom: " + p.getNom());
         System.out.println("Prix: " + p.getPrix());
         System.out.println("Coût: " + p.getCout());
         System.out.println("Catégorie: " + p.getCategorie());
@@ -49,9 +54,15 @@ public class GestionProduits {
 
     public void supprimerProduit(String nom) throws Exception {
         try {
-        em.getTransaction().begin();
-        produits.supprimer(nom);
-        em.getTransaction().commit();
+            // Démarrer la transaction
+            em.getTransaction().begin();
+            // Vérifier si le produit existe
+            if(produits.chercher(nom) == null) 
+            throw new Exception("Produit introuvable.");
+            // Supprimer le produit
+            produits.supprimer(nom);
+            // Valider la transaction
+            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;
