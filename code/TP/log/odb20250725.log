@@ -112,3 +112,26 @@ Type tp.objets.Fournisseur is not enhanced.
 [2025-07-25 14:13:53 #7 store] 
 Database '/Users/moru/Desktop/ift287/gitProjetFinal/ift287/code/TP/db/ift287.odb' is closed by 4135@Morus-MacBook-Air.local
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-07-25 14:57:38 #1 store] 
+Database '/Users/moru/Desktop/ift287/gitProjetFinal/ift287/code/TP/db/ift287.odb' is opened by 18273@Morus-MacBook-Air.local
+
+[2025-07-25 14:57:38 #2 store] 
+Configuration path: ?
+
+[2025-07-25 14:57:38 #3 type] 
+Type tp.objets.Producteur is not enhanced.
+
+[2025-07-25 14:57:38 #4 type] 
+Type tp.objets.Produit is not enhanced.
+
+[2025-07-25 14:57:38 #5 type] 
+Type tp.objets.PointDeVente is not enhanced.
+
+[2025-07-25 14:57:38 #6 type] 
+Type tp.objets.Fournisseur is not enhanced.
+
+[2025-07-25 14:57:38 #7 store] 
+Database '/Users/moru/Desktop/ift287/gitProjetFinal/ift287/code/TP/db/ift287.odb' is closed by 18273@Morus-MacBook-Air.local
+

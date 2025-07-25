@@ -16,10 +16,8 @@ public class Apce {
 
     public static void main(String[] args) {
         try {
-            // Connexion à la base de données avec ObjectDB
+            // Connexion à la base de données
             cx = new Connexion("objectdbPU");
-
-            // Créer les gestionnaires avec Connexion
             gestionProducteurs = new GestionProducteurs(cx);
             gestionProduits = new GestionProduits(cx);
             gestionFournisseurs = new GestionFournisseurs(cx);
@@ -29,13 +27,8 @@ public class Apce {
             BufferedReader reader = new BufferedReader(new FileReader(
                     "/Users/moru/Desktop/ift287/gitProjetFinal/ift287/code/TP/src/transactions.txt"));
 
-            String ligne;
-            while ((ligne = reader.readLine()) != null) {
-                // Echo de la commande
-                System.out.println(ligne);
-                traiterTransaction(ligne);
-            }
-
+            // Lire et traiter toutes les transactions avec echo
+            traiterTransactions(reader, true);
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
             if (cx != null && cx.getEntityManager().getTransaction().isActive())
@@ -45,11 +38,18 @@ public class Apce {
         }
     }
 
-    private static void traiterTransaction(String ligne) throws Exception {
-        StringTokenizer st = new StringTokenizer(ligne);
-        if (!st.hasMoreTokens()) return;
-        String commande = st.nextToken();
+    private static void traiterTransactions(BufferedReader reader, boolean echo) throws Exception {
+        String ligne;
+        while ((ligne = reader.readLine()) != null) {
+            if (echo) System.out.println(ligne);
+            StringTokenizer st = new StringTokenizer(ligne);
+            if (!st.hasMoreTokens()) continue;
+            executerTransaction(st);
+        }
+    }
 
+    private static void executerTransaction(StringTokenizer st) throws Exception {
+        String commande = st.nextToken();
         try {
             switch (commande) {
                 case "ajouterProducteur" -> gestionProducteurs.ajouterProducteur(

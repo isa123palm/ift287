@@ -40,9 +40,9 @@ afficherProduit Inexistant
 supprimerProduit Inexistant
 
 # Test prix négatif
-ajouterProduit ProduitNeg -5.00 3.00 testCat BellaJam
-afficherProduit ProduitNeg
-supprimerProduit ProduitNeg
+ajouterProduit ProduitNegatif -5.00 3.00 testCat BellaJam
+afficherProduit ProduitNegatif
+supprimerProduit ProduitNegatif
 
 ajouterProduit TestProd 10.00 5.00 testCat BellaJam
 fabriquerProduit TestProd MangoInc
