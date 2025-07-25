@@ -27,7 +27,7 @@ public class Apce {
 
             // IMPORTANT : ajuster le chemin vers votre fichier transactions.txt si nécessaire
             BufferedReader reader = new BufferedReader(new FileReader(
-                    "/Users/bellapalm/Library/CloudStorage/OneDrive-USherbrooke/4.E2025/IFT287/Projet final/GitHub/ift287/code/TP/src/transactions.txt"));
+                    "/Users/moru/Desktop/ift287/gitProjetFinal/ift287/code/TP/src/transactions.txt"));
 
             String ligne;
             while ((ligne = reader.readLine()) != null) {

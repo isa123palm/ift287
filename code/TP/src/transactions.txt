@@ -18,3 +18,34 @@ supprimerProduit ConfiMangue
 supprimerFournisseur MangoInc
 supprimerPointDeVente MarcheBerri
 supprimerProducteur BellaJam
+
+# Cas limites
+ajouterProducteur BellaJam bella@jam.ca 7 123 rue des fruits
+ajouterProducteur BellaJam bell2@jam.ca 5 456 rue duplica
+supprimerProducteur Inexistant
+afficherProducteur Inexistant
+
+ajouterFournisseur MangoInc mango@inc.ca 123 rue Tropic
+ajouterFournisseur MangoInc mango2@inc.ca 456 rue duplica
+supprimerFournisseur Inexistant
+afficherFournisseur Inexistant
+
+ajouterPointDeVente MarcheBerri contact@berri.ca 789 rue Marche
+ajouterPointDeVente MarcheBerri autre@berri.ca 1011 rue duplica
+supprimerPointDeVente Inexistant
+afficherPointDeVente Inexistant
+
+ajouterProduit TestProd 10.00 5.00 testCat InexistantProducteur
+afficherProduit Inexistant
+supprimerProduit Inexistant
+
+ajouterProduit TestProd 10.00 5.00 testCat BellaJam
+fabriquerProduit TestProd MangoInc
+retirerProduitFournisseur TestProd MangoInc
+vendreProduit TestProd MarcheBerri
+retirerProduitPointDeVente TestProd MarcheBerri
+
+supprimerProduit TestProd
+supprimerFournisseur MangoInc
+supprimerPointDeVente MarcheBerri
+supprimerProducteur BellaJam
