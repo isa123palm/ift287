@@ -1,14 +1,17 @@
 package tp.collections;
 
+import tp.bdd.Connexion;
 import tp.objets.PointDeVente;
 
 import javax.persistence.EntityManager;
 
 public class PointsDeVente {
+    private final Connexion cx;
     private final EntityManager em;
 
-    public PointsDeVente(EntityManager em) {
-        this.em = em;
+    public PointsDeVente(Connexion cx) {
+        this.cx = cx;
+        this.em = cx.getConnection();
     }
 
     public void ajouter(PointDeVente pdv) throws Exception {

@@ -1,31 +1,30 @@
 package tp.gestion;
 
+import tp.bdd.Connexion;
 import tp.collections.Producteurs;
 import tp.objets.Producteur;
 
-import javax.persistence.EntityManager;
-
 public class GestionProducteurs {
-    private final EntityManager em;
+    private final Connexion cx;
     private final Producteurs producteurs;
 
-    public GestionProducteurs(EntityManager em) {
-        this.em = em;
-        this.producteurs = new Producteurs(em);
+    public GestionProducteurs(Connexion cx) {
+        this.cx = cx;
+        this.producteurs = new Producteurs(cx);
     }
 
     public void ajouterProducteur(String nom, String courriel, int nbEmp, String adresse) throws Exception {
         try {
             // Démarrer la transaction
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le producteur existe déjà
-            if(producteurs.chercher(nom) != null) 
-            throw new Exception("Producteur déjà existant.");
+            if(producteurs.chercher(nom) != null)
+                throw new Exception("Producteur déjà existant.");
             // Ajouter le producteur
             producteurs.ajouter(new Producteur(nom, courriel, nbEmp, adresse));
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }
@@ -41,23 +40,23 @@ public class GestionProducteurs {
             System.out.println("Adresse: " + p.getAdresse());
             System.out.println("Nb employés: " + p.getNbEmployes());
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback(); // même si pas de commit, rollback protège contre bugs
             throw e;
         }
     }
 
     public void supprimerProducteur(String nom) throws Exception {
         try {
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le producteur existe
-            if(producteurs.chercher(nom) == null) 
-            throw new Exception("Producteur introuvable.");
+            if(producteurs.chercher(nom) == null)
+                throw new Exception("Producteur introuvable.");
             // Supprimer le producteur
             producteurs.supprimer(nom);
             // Valider la transaction
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }

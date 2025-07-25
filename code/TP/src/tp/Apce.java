@@ -16,15 +16,19 @@ public class Apce {
 
     public static void main(String[] args) {
         try {
+            // Connexion à la base de données avec ObjectDB
             cx = new Connexion("objectdbPU");
 
-            gestionProducteurs = new GestionProducteurs(cx.getEntityManager());
-            gestionProduits = new GestionProduits(cx.getEntityManager());
-            gestionFournisseurs = new GestionFournisseurs(cx.getEntityManager());
-            gestionPointsDeVente = new GestionPointsDeVente(cx.getEntityManager());
+            // Créer les gestionnaires avec Connexion
+            gestionProducteurs = new GestionProducteurs(cx);
+            gestionProduits = new GestionProduits(cx);
+            gestionFournisseurs = new GestionFournisseurs(cx);
+            gestionPointsDeVente = new GestionPointsDeVente(cx);
 
-            //IMPORTANT : CHANGE SOURCE ROOT FILE PATH
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/bellapalm/Library/CloudStorage/OneDrive-USherbrooke/4.E2025/IFT287/Projet final/GitHub/ift287/code/TP/src/transactions.txt"));
+            // IMPORTANT : ajuster le chemin vers votre fichier transactions.txt si nécessaire
+            BufferedReader reader = new BufferedReader(new FileReader(
+                    "/Users/bellapalm/Library/CloudStorage/OneDrive-USherbrooke/4.E2025/IFT287/Projet final/GitHub/ift287/code/TP/src/transactions.txt"));
+
             String ligne;
             while ((ligne = reader.readLine()) != null) {
                 traiterTransaction(ligne);
@@ -101,4 +105,9 @@ public class Apce {
     private static String lireChaineAvecEspaces(StringTokenizer st) {
         StringBuilder sb = new StringBuilder();
         while (st.hasMoreTokens()) {
-            sb.appe
+            sb.append(st.nextToken());
+            if (st.hasMoreTokens()) sb.append(" ");
+        }
+        return sb.toString();
+    }
+}

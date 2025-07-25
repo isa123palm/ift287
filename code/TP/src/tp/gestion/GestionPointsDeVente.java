@@ -1,34 +1,33 @@
 package tp.gestion;
 
+import tp.bdd.Connexion;
 import tp.collections.PointsDeVente;
 import tp.collections.Produits;
 import tp.objets.PointDeVente;
 import tp.objets.Produit;
 
-import javax.persistence.EntityManager;
-
 public class GestionPointsDeVente {
-    private final EntityManager em;
+    private final Connexion cx;
     private final PointsDeVente pointsDeVente;
     private final Produits produits;
 
-    public GestionPointsDeVente(EntityManager em) {
-        this.em = em;
-        this.pointsDeVente = new PointsDeVente(em);
-        this.produits = new Produits(em);
+    public GestionPointsDeVente(Connexion cx) {
+        this.cx = cx;
+        this.pointsDeVente = new PointsDeVente(cx);
+        this.produits = new Produits(cx);
     }
 
     public void ajouterPointDeVente(String nom, String courriel, String adresse) throws Exception {
         try {
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le point de vente existe déjà
-            if(pointsDeVente.chercher(nom) != null) 
-            throw new Exception("Point de vente déjà existant.");
+            if (pointsDeVente.chercher(nom) != null)
+                throw new Exception("Point de vente déjà existant.");
             // Ajouter le point de vente
             pointsDeVente.ajouter(new PointDeVente(nom, courriel, adresse));
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }
@@ -50,22 +49,22 @@ public class GestionPointsDeVente {
 
     public void supprimerPointDeVente(String nom) throws Exception {
         try {
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le point de vente existe
-            if(pointsDeVente.chercher(nom) == null) 
-            throw new Exception("Point de vente introuvable.");
+            if (pointsDeVente.chercher(nom) == null)
+                throw new Exception("Point de vente introuvable.");
             // Supprimer le point de vente
             pointsDeVente.supprimer(nom);
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }
 
     public void vendreProduit(String nomProduit, String nomPointDeVente) throws Exception {
         try {
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le produit existe
             Produit p = produits.chercher(nomProduit);
             if (p == null) throw new Exception("Produit introuvable.");
@@ -77,18 +76,16 @@ public class GestionPointsDeVente {
             pdv.ajouterProduit(p);
             // Ajouter le point de vente au produit
             p.ajouterPointDeVente(pdv);
-            // Valider la transaction
-
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }
 
     public void retirerProduit(String nomProduit, String nomPointDeVente) throws Exception {
         try {
-            em.getTransaction().begin();
+            cx.demarreTransaction();
             // Vérifier si le produit existe
             Produit p = produits.chercher(nomProduit);
             if (p == null) throw new Exception("Produit introuvable.");
@@ -100,11 +97,9 @@ public class GestionPointsDeVente {
             pdv.retirerProduit(p);
             // Retirer le point de vente du produit
             p.retirerPointDeVente(pdv);
-            // Valider la transaction
-
-            em.getTransaction().commit();
+            cx.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            cx.rollback();
             throw e;
         }
     }

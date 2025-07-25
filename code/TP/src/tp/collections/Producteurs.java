@@ -1,15 +1,17 @@
 package tp.collections;
 
-
+import tp.bdd.Connexion;
 import tp.objets.Producteur;
 
 import javax.persistence.EntityManager;
 
 public class Producteurs {
+    private final Connexion cx;
     private final EntityManager em;
 
-    public Producteurs(EntityManager em) {
-        this.em = em;
+    public Producteurs(Connexion cx) {
+        this.cx = cx;
+        this.em = cx.getConnection();
     }
 
     public void ajouter(Producteur p) throws Exception {

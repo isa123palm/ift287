@@ -1,14 +1,17 @@
 package tp.collections;
 
+import tp.bdd.Connexion;
 import tp.objets.Fournisseur;
 
 import javax.persistence.EntityManager;
 
 public class Fournisseurs {
+    private final Connexion cx;
     private final EntityManager em;
 
-    public Fournisseurs(EntityManager em) {
-        this.em = em;
+    public Fournisseurs(Connexion cx) {
+        this.cx = cx;
+        this.em = cx.getConnection();
     }
 
     public void ajouter(Fournisseur f) throws Exception {
