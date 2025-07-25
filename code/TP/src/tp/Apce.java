@@ -31,6 +31,8 @@ public class Apce {
 
             String ligne;
             while ((ligne = reader.readLine()) != null) {
+                // Echo de la commande
+                System.out.println(ligne);
                 traiterTransaction(ligne);
             }
 

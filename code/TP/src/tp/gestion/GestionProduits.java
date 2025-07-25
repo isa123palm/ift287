@@ -21,6 +21,8 @@ public class GestionProduits {
         try {
             // Démarrer la transaction
             cx.demarreTransaction();
+            // Vérifier que le prix n'est pas négatif
+            if (prix < 0) throw new Exception("Le prix ne peut pas être négatif.");
             // Vérifier si le producteur existe
             Producteur prod = producteurs.chercher(nomProducteur);
             if (prod == null) throw new Exception("Producteur introuvable.");
