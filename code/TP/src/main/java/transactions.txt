@@ -3,54 +3,54 @@ ajouterProduit ConfiMangue 7.99 3.50 tropical BellaJam
 ajouterFournisseur MangoInc mango@inc.ca 123 rue Tropic
 ajouterPointDeVente MarcheBerri contact@berri.ca 789 rue Marche
 
-fabriquerProduit ConfiMangue MangoInc
-vendreProduit ConfiMangue MarcheBerri
+fabriquerProduit 1 1
+vendreProduit 1 1
 
-afficherProducteur BellaJam
-afficherProduit ConfiMangue
-afficherFournisseur MangoInc
-afficherPointDeVente MarcheBerri
+afficherProducteur 1
+afficherProduit 1
+afficherFournisseur 1
+afficherPointDeVente 1
 
-retirerProduitFournisseur ConfiMangue MangoInc
-retirerProduitPointDeVente ConfiMangue MarcheBerri
+retirerProduitFournisseur 1 1
+retirerProduitPointDeVente 1 1
 
-supprimerProduit ConfiMangue
-supprimerFournisseur MangoInc
-supprimerPointDeVente MarcheBerri
-supprimerProducteur BellaJam
+supprimerProduit 1
+supprimerFournisseur 1
+supprimerPointDeVente 1
+supprimerProducteur 1
 
 # Cas limites
 ajouterProducteur BellaJam bella@jam.ca 7 123 rue des fruits
 ajouterProducteur BellaJam bell2@jam.ca 5 456 rue duplica
-supprimerProducteur Inexistant
-afficherProducteur Inexistant
+supprimerProducteur 99
+afficherProducteur 99
 
 ajouterFournisseur MangoInc mango@inc.ca 123 rue Tropic
 ajouterFournisseur MangoInc mango2@inc.ca 456 rue duplica
-supprimerFournisseur Inexistant
-afficherFournisseur Inexistant
+supprimerFournisseur 99
+afficherFournisseur 99
 
 ajouterPointDeVente MarcheBerri contact@berri.ca 789 rue Marche
 ajouterPointDeVente MarcheBerri autre@berri.ca 1011 rue duplica
-supprimerPointDeVente Inexistant
-afficherPointDeVente Inexistant
+supprimerPointDeVente 99
+afficherPointDeVente 99
 
-ajouterProduit TestProd 10.00 5.00 testCat InexistantProducteur
-afficherProduit Inexistant
-supprimerProduit Inexistant
+ajouterProduit TestProd 10.00 5.00 testCat BellaJam
+afficherProduit 99
+supprimerProduit 99
 
 # Test prix négatif
 ajouterProduit ProduitNegatif -5.00 3.00 testCat BellaJam
-afficherProduit ProduitNegatif
-supprimerProduit ProduitNegatif
+afficherProduit 99
+supprimerProduit 99
 
 ajouterProduit TestProd 10.00 5.00 testCat BellaJam
-fabriquerProduit TestProd MangoInc
-retirerProduitFournisseur TestProd MangoInc
-vendreProduit TestProd MarcheBerri
-retirerProduitPointDeVente TestProd MarcheBerri
+fabriquerProduit 1 1
+retirerProduitFournisseur 1 1
+vendreProduit 1 1
+retirerProduitPointDeVente 1 1
 
-supprimerProduit TestProd
-supprimerFournisseur MangoInc
-supprimerPointDeVente MarcheBerri
-supprimerProducteur BellaJam
+supprimerProduit 1
+supprimerFournisseur 1
+supprimerPointDeVente 1
+supprimerProducteur 1
