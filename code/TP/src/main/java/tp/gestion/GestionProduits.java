@@ -26,7 +26,7 @@ public class GestionProduits {
             if (prix < 0) throw new Exception("Le prix ne peut pas être négatif.");
 
             // Vérifier si le producteur existe
-            Producteur prod = producteurs.chercher(nomProducteur);
+            Producteur prod = producteurs.chercherParNom(nomProducteur);
             if (prod == null) throw new Exception("Producteur introuvable.");
 
             // Ajouter le produit

@@ -1,17 +1,16 @@
 package tp.collections;
 
 import tp.bdd.Connexion;
-import tp.objets.Fournisseur;
 import tp.objets.Produit;
 
 import javax.persistence.EntityManager;
 
 public class Produits {
-    private final Connexion cx;
+    //private final Connexion cx;
     private final EntityManager em;
 
     public Produits(Connexion cx) {
-        this.cx = cx;
+        //this.cx = cx;
         this.em = cx.getConnection();
     }
 

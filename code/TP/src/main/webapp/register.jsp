@@ -34,7 +34,7 @@
 
         <h4 class="mb-3">Créer un compte</h4>
 
-        <form action="Register" method="post">
+        <form action="register" method="post">
             <div class="mb-3 text-start">
                 <label class="form-label">Rôle</label>
                 <select name="role" id="role" class="form-select" onchange="toggleFields()" required>
@@ -56,7 +56,7 @@
 
             <div class="mb-3 text-start">
                 <label class="form-label">Courriel</label>
-                <input type="email" name="courriel" class="form-control" required>
+                <input type="email" name="email" class="form-control" required>
             </div>
 
             <div class="mb-3 text-start">

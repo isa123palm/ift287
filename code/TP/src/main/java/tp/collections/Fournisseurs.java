@@ -3,14 +3,17 @@ package tp.collections;
 import tp.bdd.Connexion;
 import tp.objets.Fournisseur;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class Fournisseurs {
-    private final Connexion cx;
+    //private final Connexion cx;
     private final EntityManager em;
 
     public Fournisseurs(Connexion cx) {
-        this.cx = cx;
+        //this.cx = cx;
         this.em = cx.getConnection();
     }
 
@@ -20,12 +23,28 @@ public class Fournisseurs {
         em.persist(f);
     }
 
-    public Fournisseur chercher(String nom) {
-        return em.find(Fournisseur.class, nom);
-    }
-
     public Fournisseur chercherParId(int id) {
         return em.find(Fournisseur.class, id);
+    }
+
+    public Fournisseur chercherParNom(String nom) {
+        TypedQuery<Fournisseur> query = em.createQuery(
+            "SELECT f FROM Fournisseur f WHERE f.nom = :nom", Fournisseur.class);
+        query.setParameter("nom", nom);
+
+        return query.getResultStream().findFirst().orElse(null);
+    }
+
+    public Fournisseur chercherParCourriel(String courriel) {
+        TypedQuery<Fournisseur> query = em.createQuery(
+            "SELECT f FROM Fournisseur f WHERE f.courriel = :courriel", Fournisseur.class);
+        query.setParameter("courriel", courriel);
+
+        return query.getResultStream().findFirst().orElse(null);
+    }
+
+    public List<Fournisseur> listerTous() {
+        return em.createQuery("SELECT f FROM Fournisseur f", Fournisseur.class).getResultList();
     }
 
     public void supprimer(int id) throws Exception {

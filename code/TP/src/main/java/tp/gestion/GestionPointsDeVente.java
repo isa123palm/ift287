@@ -1,9 +1,13 @@
 package tp.gestion;
 
+import java.util.List;
+
 import tp.bdd.Connexion;
 import tp.collections.PointsDeVente;
 import tp.collections.Produits;
+import tp.objets.Fournisseur;
 import tp.objets.PointDeVente;
+import tp.objets.Producteur;
 import tp.objets.Produit;
 
 public class GestionPointsDeVente {
@@ -21,7 +25,7 @@ public class GestionPointsDeVente {
         try {
             cx.demarreTransaction();
             // Vérifier si le point de vente existe déjà
-            if (pointsDeVente.chercher(nom) != null) throw new Exception("Point de vente déjà existant.");
+            if (pointsDeVente.chercherParNom(nom) != null) throw new Exception("Point de vente déjà existant.");
             
             // Ajouter le point de vente
             pointsDeVente.ajouter(new PointDeVente(nom, courriel, motDePasse, adresse));
@@ -115,4 +119,21 @@ public class GestionPointsDeVente {
             throw e;
         }
     }
+
+    public PointDeVente chercherParCourriel(String courriel) throws Exception {
+        try {
+            return pointsDeVente.chercherParCourriel(courriel);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par courriel", e);
+        }
+    }
+
+    public List<PointDeVente> listerTous() throws Exception {
+        try {
+            return pointsDeVente.listerTous();
+        } catch (Exception e) {
+            throw new Exception("Erreur lors du listage des points de vente", e);
+        }
+    }
+
 }

@@ -1,7 +1,10 @@
 package tp.gestion;
 
+import java.util.List;
+
 import tp.bdd.Connexion;
 import tp.collections.Producteurs;
+import tp.objets.Fournisseur;
 import tp.objets.Producteur;
 
 public class GestionProducteurs {
@@ -19,7 +22,7 @@ public class GestionProducteurs {
             cx.demarreTransaction();
 
             // Vérifier si le producteur existe déjà
-            if (producteurs.chercher(nom) != null) throw new Exception("Producteur déjà existant.");
+            if (producteurs.chercherParNom(nom) != null) throw new Exception("Producteur déjà existant.");
 
             // Ajouter le producteur
             producteurs.ajouter(new Producteur(nom, courriel, motDePasse, nbEmp, adresse));
@@ -66,4 +69,21 @@ public class GestionProducteurs {
             throw e;
         }
     }
+
+    public Producteur chercherParCourriel(String courriel) throws Exception {
+        try {
+            return producteurs.chercherParCourriel(courriel);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par courriel", e);
+        }
+    }
+
+    public List<Producteur> listerTous() throws Exception {
+        try {
+            return producteurs.listerTous();
+        } catch (Exception e) {
+            throw new Exception("Erreur lors du listage des producteurs.", e);
+        }
+    }
+
 }

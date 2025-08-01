@@ -1,9 +1,12 @@
 package tp.gestion;
 
+import java.util.List;
+
 import tp.bdd.Connexion;
 import tp.collections.Fournisseurs;
 import tp.collections.Produits;
 import tp.objets.Fournisseur;
+import tp.objets.Producteur;
 import tp.objets.Produit;
 
 public class GestionFournisseurs {
@@ -21,8 +24,8 @@ public class GestionFournisseurs {
         try {
             cx.demarreTransaction();
             // Vérifier si le fournisseur existe déjà
-            if(fournisseurs.chercher(nom) != null)
-                throw new Exception("Fournisseur déjà existant.");
+            if (fournisseurs.chercherParNom(nom) != null) throw new Exception("Fournisseur déjà existant.");
+            
             // Ajouter le fournisseur
             fournisseurs.ajouter(new Fournisseur(nom, courriel, motDePasse, adresse));
             cx.commit();
@@ -111,4 +114,21 @@ public class GestionFournisseurs {
             throw e;
         }
     }
+
+    public Fournisseur chercherParCourriel(String courriel) throws Exception {
+        try {
+            return fournisseurs.chercherParCourriel(courriel);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par courriel", e);
+        }
+    }
+
+    public List<Fournisseur> listerTous() throws Exception {
+        try {
+            return fournisseurs.listerTous();
+        } catch (Exception e) {
+            throw new Exception("Erreur lors du listage des fournisseurs.", e);
+        }
+    }
+
 }

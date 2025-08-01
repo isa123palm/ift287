@@ -3,8 +3,8 @@
              version="2.1">
     <persistence-unit name="objectdbPU">
         <provider>com.objectdb.jpa.Provider</provider>
-        <class>tp.tp.objets.Producteur</class>
-        <class>tp.tp.objets.Produit</class>
+        <class>tp.objets.Producteur</class>
+        <class>tp.objets.Produit</class>
         <class>tp.objets.Fournisseur</class>
         <class>tp.objets.PointDeVente</class>
 
