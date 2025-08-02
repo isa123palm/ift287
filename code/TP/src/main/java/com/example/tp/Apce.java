@@ -4,6 +4,7 @@ import tp.bdd.Connexion;
 import tp.gestion.*;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.StringTokenizer;
 
 import javax.persistence.EntityManager;
@@ -26,8 +27,8 @@ public class Apce {
             gestionPointsDeVente = new GestionPointsDeVente(cx);
 
             // Exécution des transactions en console
-            //BufferedReader reader = new BufferedReader(new FileReader("transactions.txt"));
-            //traiterTransactions(reader, true);
+            BufferedReader reader = new BufferedReader( new FileReader("code/TP/src/main/java/transactions.txt"));
+            traiterTransactions(reader, true);
 
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
@@ -45,54 +46,54 @@ public class Apce {
             if (echo) System.out.println(ligne);
             StringTokenizer st = new StringTokenizer(ligne);
             if (!st.hasMoreTokens()) continue;
-            //executerTransaction(st);
+            executerTransaction(st);
         }
     }
 
-    /*private static void executerTransaction(StringTokenizer st) throws Exception {
+    private static void executerTransaction(StringTokenizer st) throws Exception {
         String commande = st.nextToken();
         try {
             switch (commande) {
                 case "ajouterProducteur" -> gestionProducteurs.ajouterProducteur(
                         st.nextToken(), st.nextToken(), st.nextToken(), Integer.parseInt(st.nextToken()), lireChaineAvecEspaces(st));
 
-                case "afficherProducteur" -> gestionProducteurs.afficherProducteur(st.nextToken());
+                case "afficherProducteur" -> gestionProducteurs.afficherProducteur(Integer.parseInt(st.nextToken()));
 
-                case "supprimerProducteur" -> gestionProducteurs.supprimerProducteur(st.nextToken());
+                case "supprimerProducteur" -> gestionProducteurs.supprimerProducteur(Integer.parseInt(st.nextToken()));
 
                 case "ajouterProduit" -> gestionProduits.ajouterProduit(
                         st.nextToken(), Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken()),
                         st.nextToken(), st.nextToken());
 
-                case "afficherProduit" -> gestionProduits.afficherProduit(st.nextToken());
+                case "afficherProduit" -> gestionProduits.afficherProduit(Integer.parseInt(st.nextToken()));
 
-                case "supprimerProduit" -> gestionProduits.supprimerProduit(st.nextToken());
+                case "supprimerProduit" -> gestionProduits.supprimerProduit(Integer.parseInt(st.nextToken()));
 
                 case "ajouterFournisseur" -> gestionFournisseurs.ajouterFournisseur(
                         st.nextToken(), st.nextToken(), st.nextToken(), lireChaineAvecEspaces(st));
 
-                case "afficherFournisseur" -> gestionFournisseurs.afficherFournisseur(st.nextToken());
+                case "afficherFournisseur" -> gestionFournisseurs.afficherFournisseur(Integer.parseInt(st.nextToken()));
 
-                case "supprimerFournisseur" -> gestionFournisseurs.supprimerFournisseur(st.nextToken());
+                case "supprimerFournisseur" -> gestionFournisseurs.supprimerFournisseur(Integer.parseInt(st.nextToken()));
 
                 case "fabriquerProduit" -> gestionFournisseurs.fabriquerProduit(
-                        st.nextToken(), st.nextToken());
+                        Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
                 case "retirerProduitFournisseur" -> gestionFournisseurs.retirerProduit(
-                        st.nextToken(), st.nextToken());
+                        Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
                 case "ajouterPointDeVente" -> gestionPointsDeVente.ajouterPointDeVente(
-                        st.nextToken(), st.nextToken(), st.nextToken(), lireChaineAvecEspaces(st));
+                    st.nextToken(), st.nextToken(), st.nextToken(), lireChaineAvecEspaces(st));
 
-                case "afficherPointDeVente" -> gestionPointsDeVente.afficherPointDeVente(st.nextToken());
+                case "afficherPointDeVente" -> gestionPointsDeVente.afficherPointDeVente(Integer.parseInt(st.nextToken()));
 
-                case "supprimerPointDeVente" -> gestionPointsDeVente.supprimerPointDeVente(st.nextToken());
+                case "supprimerPointDeVente" -> gestionPointsDeVente.supprimerPointDeVente(Integer.parseInt(st.nextToken()));
 
                 case "vendreProduit" -> gestionPointsDeVente.vendreProduit(
-                        st.nextToken(), st.nextToken());
+                        Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
                 case "retirerProduitPointDeVente" -> gestionPointsDeVente.retirerProduit(
-                        st.nextToken(), st.nextToken());
+                        Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
                 case "exit" -> System.exit(0);
 
@@ -103,7 +104,7 @@ public class Apce {
             if (cx.getEntityManager().getTransaction().isActive())
                 cx.getEntityManager().getTransaction().rollback();
         }
-    }*/
+    }
 
     private static String lireChaineAvecEspaces(StringTokenizer st) {
         StringBuilder sb = new StringBuilder();
