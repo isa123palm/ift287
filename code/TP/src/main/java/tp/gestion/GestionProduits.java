@@ -1,9 +1,12 @@
 package tp.gestion;
 
+import java.util.List;
+
 import tp.bdd.Connexion;
 import tp.collections.Produits;
 import tp.collections.Producteurs;
 import tp.objets.Produit;
+import tp.objets.PointDeVente;
 import tp.objets.Producteur;
 
 public class GestionProduits {
@@ -60,19 +63,41 @@ public class GestionProduits {
 
     public void supprimerProduit(int id) throws Exception {
         try {
-            // Démarrer la transaction
             cx.demarreTransaction();
-            // Vérifier si le produit existe
-            if (produits.chercherParId(id) == null) throw new Exception("Produit introuvable.");
 
-            // Supprimer le produit
+            Produit produit = produits.chercherParId(id);
+            if (produit == null)
+                throw new Exception("Produit introuvable.");
+
+            // Retirer le produit de son producteur
+            Producteur prod = produit.getProducteur();
+            if (prod != null) {
+                prod.getProduits().remove(produit);
+            }
+
+            // Supprimer le produit (et associations)
             produits.supprimer(id);
-            
-            // Valider la transaction
+
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
             throw e;
+        }
+    }
+
+    public Produit chercherParId(int id) throws Exception {
+        try {
+            return produits.chercherParId(id);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par id", e);
+        }
+    }
+
+    public List<Produit> listerTous() throws Exception {
+        try {
+            return produits.listerTous();
+        } catch (Exception e) {
+            throw new Exception("Erreur lors du listage des produits.", e);
         }
     }
 }

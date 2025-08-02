@@ -32,14 +32,14 @@ public class PointsDeVente {
             "SELECT p FROM PointDeVente p WHERE p.nom = :nom", PointDeVente.class);
         query.setParameter("nom", nom);
 
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public PointDeVente chercherParCourriel(String courriel) {
         TypedQuery<PointDeVente> query = em.createQuery(
             "SELECT p FROM PointDeVente p WHERE p.courriel = :courriel", PointDeVente.class);
         query.setParameter("courriel", courriel);
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public List<PointDeVente> listerTous() {

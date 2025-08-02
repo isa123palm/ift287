@@ -16,6 +16,17 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <!-- Servlet Logout -->
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.example.tp.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
     <!-- Servlet Register -->
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -27,15 +38,154 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-    <!-- Servlet Accueil -->
+    <!-- Servlet Producteur -->
     <servlet>
-        <servlet-name>Accueil</servlet-name>
-        <servlet-class>com.example.tp.AccueilServlet</servlet-class>
+        <servlet-name>DashboardProducteur</servlet-name>
+        <servlet-class>com.example.tp.DashboardProducteurServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Accueil</servlet-name>
-        <url-pattern>/accueil</url-pattern>
+        <servlet-name>DashboardProducteur</servlet-name>
+        <url-pattern>/dasboard_producteur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjouterProduit</servlet-name>
+        <servlet-class>com.example.tp.AjouterProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AjouterProduit</servlet-name>
+        <url-pattern>/ajouter_produit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SupprimerProduit</servlet-name>
+        <servlet-class>com.example.tp.SupprimerProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerProduit</servlet-name>
+        <url-pattern>/supprimer_produit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AssocierFournisseur</servlet-name>
+        <servlet-class>com.example.tp.AssocierFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AssocierFournisseur</servlet-name>
+        <url-pattern>/associer_fournisseur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AssocierDistributeur</servlet-name>
+        <servlet-class>com.example.tp.AssocierDistributeurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AssocierDistributeur</servlet-name>
+        <url-pattern>/associer_distributeur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetirerFournisseur</servlet-name>
+        <servlet-class>com.example.tp.RetirerFournisseurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetirerFournisseur</servlet-name>
+        <url-pattern>/retirer_fournisseur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetirerDistributeur</servlet-name>
+        <servlet-class>com.example.tp.RetirerDistributeurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetirerDistributeur</servlet-name>
+        <url-pattern>/retirer_distributeur</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet Fournisseur -->
+    <servlet>
+        <servlet-name>DashboardFournisseur</servlet-name>
+        <servlet-class>com.example.tp.DashboardFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DashboardFournisseur</servlet-name>
+        <url-pattern>/dasboard_fournisseur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FabriquerProduitServlet</servlet-name>
+        <servlet-class>com.example.tp.FabriquerProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FabriquerProduitServlet</servlet-name>
+        <url-pattern>/fabriquer_produit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetirerProduitFournisseurServlet</servlet-name>
+        <servlet-class>com.example.tp.RetirerProduitFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RetirerProduitFournisseurServlet</servlet-name>
+        <url-pattern>/retirer_produit_fournisseur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SupprimerFournisseurServlet</servlet-name>
+        <servlet-class>com.example.tp.SupprimerFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerFournisseurServlet</servlet-name>
+        <url-pattern>/supprimer_fournisseur</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet PointDeVente -->
+    <servlet>
+        <servlet-name>DashboardPointDeVenteServlet</servlet-name>
+        <servlet-class>com.example.tp.DashboardPointDeVenteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DashboardPointDeVenteServlet</servlet-name>
+        <url-pattern>/dashboard_pointdevente</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>VendreProduitServlet</servlet-name>
+        <servlet-class>com.example.tp.VendreProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VendreProduitServlet</servlet-name>
+        <url-pattern>/vendre_produit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetirerProduitPointDeVenteServlet</servlet-name>
+        <servlet-class>com.example.tp.RetirerProduitPointDeVenteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RetirerProduitPointDeVenteServlet</servlet-name>
+        <url-pattern>/retirer_produit_pointdevente</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SupprimerPointDeVenteServlet</servlet-name>
+        <servlet-class>com.example.tp.SupprimerPointDeVenteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerPointDeVenteServlet</servlet-name>
+        <url-pattern>/supprimer_pointdevente</url-pattern>
     </servlet-mapping>
 
     <!-- Servlet Debug -->
@@ -47,6 +197,26 @@
     <servlet-mapping>
         <servlet-name>Debug</servlet-name>
         <url-pattern>/debug</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InitTest</servlet-name>
+        <servlet-class>com.example.tp.InitTestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InitTest</servlet-name>
+        <url-pattern>/init_test</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SupprimerProducteur</servlet-name>
+        <servlet-class>com.example.tp.SupprimerProducteurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerProducteur</servlet-name>
+        <url-pattern>/supprimer_producteur</url-pattern>
     </servlet-mapping>
 
     <!-- Landing page -->

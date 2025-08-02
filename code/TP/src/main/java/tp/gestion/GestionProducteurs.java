@@ -1,11 +1,14 @@
 package tp.gestion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tp.bdd.Connexion;
 import tp.collections.Producteurs;
 import tp.objets.Fournisseur;
+import tp.objets.PointDeVente;
 import tp.objets.Producteur;
+import tp.objets.Produit;
 
 public class GestionProducteurs {
     private final Connexion cx;
@@ -22,7 +25,7 @@ public class GestionProducteurs {
             cx.demarreTransaction();
 
             // Vérifier si le producteur existe déjà
-            if (producteurs.chercherParNom(nom) != null) throw new Exception("Producteur déjà existant.");
+            if (producteurs.chercherParNom(nom) != null || producteurs.chercherParCourriel(courriel) != null) throw new Exception("Producteur déjà existant.");
 
             // Ajouter le producteur
             producteurs.ajouter(new Producteur(nom, courriel, motDePasse, nbEmp, adresse));
@@ -56,17 +59,33 @@ public class GestionProducteurs {
         try {
             cx.demarreTransaction();
 
-            // Vérifier si le producteur existe
-            if (producteurs.chercherParId(id) == null) throw new Exception("Producteur introuvable.");
+            Producteur p = producteurs.chercherParId(id);
+            if (p == null) throw new Exception("Producteur introuvable.");
 
-            // Supprimer le producteur
+            for (Produit prod : new ArrayList<>(p.getProduits())) {
+
+                prod.getFournisseurs().forEach(f -> f.getProduits().remove(prod));
+                prod.getPointsDeVente().forEach(pdv -> pdv.getProduits().remove(prod));
+
+                prod.getFournisseurs().clear();
+                prod.getPointsDeVente().clear();
+            }
+
             producteurs.supprimer(id);
 
-            // Valider la transaction
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
             throw e;
+        }
+    }
+
+
+    public Producteur chercherParId(int id) throws Exception {
+        try {
+            return producteurs.chercherParId(id);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par id", e);
         }
     }
 

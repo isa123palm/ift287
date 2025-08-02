@@ -56,4 +56,11 @@ public class Fournisseur {
     public void retirerProduit(Produit p) {
         produits.remove(p);
     }
+
+    public void ajouterProducteur(Producteur p) {
+        if (!producteurs.contains(p)) {
+            producteurs.add(p);
+        }
+    }
+
 }

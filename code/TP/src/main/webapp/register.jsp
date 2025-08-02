@@ -1,4 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    String role = request.getParameter("role") != null ? request.getParameter("role") : "producteur";
+    String nom = request.getParameter("nom") != null ? request.getParameter("nom") : "";
+    String adresse = request.getParameter("adresse") != null ? request.getParameter("adresse") : "";
+    String email = request.getParameter("email") != null ? request.getParameter("email") : "";
+    String password = request.getParameter("password") != null ? request.getParameter("password") : "";
+    String nbEmployes = request.getParameter("nbEmployes") != null ? request.getParameter("nbEmployes") : "";
+    String erreur = (String) request.getAttribute("erreur");
+%>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -34,39 +45,45 @@
 
         <h4 class="mb-3">Créer un compte</h4>
 
+        <% if (erreur != null) { %>
+            <div class="alert alert-danger text-start" role="alert">
+                <%= erreur %>
+            </div>
+        <% } %>
+
         <form action="register" method="post">
             <div class="mb-3 text-start">
                 <label class="form-label">Rôle</label>
                 <select name="role" id="role" class="form-select" onchange="toggleFields()" required>
-                    <option value="producteur">Producteur</option>
-                    <option value="fournisseur">Fournisseur</option>
-                    <option value="distributeur">Distributeur</option>
+                    <option value="producteur" <%= "producteur".equals(role) ? "selected" : "" %>>Producteur</option>
+                    <option value="fournisseur" <%= "fournisseur".equals(role) ? "selected" : "" %>>Fournisseur</option>
+                    <option value="distributeur" <%= "distributeur".equals(role) ? "selected" : "" %>>Distributeur</option>
                 </select>
             </div>
 
             <div class="mb-3 text-start">
                 <label class="form-label">Nom</label>
-                <input type="text" name="nom" class="form-control" required>
+                <input type="text" name="nom" class="form-control" value="<%= nom %>" required>
             </div>
 
             <div class="mb-3 text-start">
                 <label class="form-label">Adresse</label>
-                <input type="text" name="adresse" class="form-control" required>
+                <input type="text" name="adresse" class="form-control" value="<%= adresse %>" required>
             </div>
 
             <div class="mb-3 text-start">
                 <label class="form-label">Courriel</label>
-                <input type="email" name="email" class="form-control" required>
+                <input type="email" name="email" class="form-control" value="<%= email %>" required>
             </div>
 
             <div class="mb-3 text-start">
                 <label class="form-label">Mot de passe</label>
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" class="form-control" value="<%= password %>" required>
             </div>
 
-            <div id="champEmployes" class="mb-3 text-start">
+            <div id="champEmployes" class="mb-3 text-start" style="<%= "producteur".equals(role) ? "" : "display: none;" %>">
                 <label class="form-label">Nombre d’employés</label>
-                <input type="number" name="nbEmployes" class="form-control">
+                <input type="number" name="nbEmployes" class="form-control" value="<%= nbEmployes %>">
             </div>
 
             <button type="submit" class="btn btn-primary w-100">S'inscrire</button>

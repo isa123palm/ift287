@@ -32,7 +32,7 @@ public class Fournisseurs {
             "SELECT f FROM Fournisseur f WHERE f.nom = :nom", Fournisseur.class);
         query.setParameter("nom", nom);
 
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public Fournisseur chercherParCourriel(String courriel) {
@@ -40,7 +40,7 @@ public class Fournisseurs {
             "SELECT f FROM Fournisseur f WHERE f.courriel = :courriel", Fournisseur.class);
         query.setParameter("courriel", courriel);
 
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public List<Fournisseur> listerTous() {

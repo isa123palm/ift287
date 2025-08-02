@@ -24,7 +24,7 @@ public class GestionFournisseurs {
         try {
             cx.demarreTransaction();
             // Vérifier si le fournisseur existe déjà
-            if (fournisseurs.chercherParNom(nom) != null) throw new Exception("Fournisseur déjà existant.");
+            if (fournisseurs.chercherParNom(nom) != null || fournisseurs.chercherParCourriel(courriel) != null) throw new Exception("Fournisseur déjà existant.");
             
             // Ajouter le fournisseur
             fournisseurs.ajouter(new Fournisseur(nom, courriel, motDePasse, adresse));
@@ -54,11 +54,23 @@ public class GestionFournisseurs {
     public void supprimerFournisseur(int id) throws Exception {
         try {
             cx.demarreTransaction();
-            // Vérifier si le fournisseur existe
-            if (fournisseurs.chercherParId(id) == null) throw new Exception("Fournisseur introuvable.");
 
-            // Supprimer le fournisseur
+            Fournisseur fournisseur = fournisseurs.chercherParId(id);
+            if (fournisseur == null) throw new Exception("Fournisseur introuvable.");
+
+            for (Produit p : fournisseur.getProduits()) {
+                p.retirerFournisseur(fournisseur);
+            }
+
+            for (Producteur prod : fournisseur.getProducteurs()) {
+                prod.getFournisseurs().remove(fournisseur);
+            }
+
+            fournisseur.getProduits().clear();
+            fournisseur.getProducteurs().clear();
+
             fournisseurs.supprimer(id);
+
             cx.commit();
         } catch (Exception e) {
             cx.rollback();
@@ -112,6 +124,14 @@ public class GestionFournisseurs {
         } catch (Exception e) {
             cx.rollback();
             throw e;
+        }
+    }
+
+    public Fournisseur chercherParId(int id) throws Exception {
+        try {
+            return fournisseurs.chercherParId(id);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par id", e);
         }
     }
 

@@ -53,11 +53,26 @@ public class Producteur {
     public String getAdresse() { return adresse; }
 
     public List<Fournisseur> getFournisseurs() { return fournisseurs; }
-    public List<PointDeVente> getPointDeVentes() { return pointsDeVente; }
+    public List<PointDeVente> getPointsDeVente() { return pointsDeVente; }
     public List<Produit> getProduits() { return produits; }
 
     public void setNom(String nom) { this.nom = nom; }
     public void setCourriel(String courriel) { this.courriel = courriel; }
     public void setNbEmployes(int nbEmployes) { this.nbEmployes = nbEmployes; }
     public void setAdresse(String adresse) { this.adresse = adresse; }
+
+    public void ajouterFournisseur(Fournisseur f) {
+        if (!fournisseurs.contains(f)) {
+            fournisseurs.add(f);
+            f.ajouterProducteur(this);
+        }
+    }
+
+    public void ajouterPointDeVente(PointDeVente p) {
+        if (!pointsDeVente.contains(p)) {
+            pointsDeVente.add(p);
+            p.ajouterProducteur(this);
+        }
+    }
+
 }

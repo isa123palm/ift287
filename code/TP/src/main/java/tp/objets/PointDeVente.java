@@ -55,4 +55,10 @@ public class PointDeVente {
     public void retirerProduit(Produit p) {
         produits.remove(p);
     }
+
+    public void ajouterProducteur(Producteur p) {
+        if (!producteurs.contains(p)) {
+            producteurs.add(p);
+        }
+    }
 }

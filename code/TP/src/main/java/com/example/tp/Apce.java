@@ -6,6 +6,8 @@ import tp.gestion.*;
 import java.io.BufferedReader;
 import java.util.StringTokenizer;
 
+import javax.persistence.EntityManager;
+
 public class Apce {
     private static Connexion cx;
 
@@ -120,6 +122,10 @@ public class Apce {
         gestionPointsDeVente = new GestionPointsDeVente(cx);
     }
 
+    public static EntityManager getEntityManager() {
+        return cx.getConnection();
+    }
+
     public static GestionProducteurs getGestionProducteurs() {
         return gestionProducteurs;
     }
@@ -130,6 +136,10 @@ public class Apce {
 
     public static GestionPointsDeVente getGestionPointsDeVente() {
         return gestionPointsDeVente;
+    }
+
+    public static GestionProduits getGestionProduits() {
+        return gestionProduits;
     }
 
 }

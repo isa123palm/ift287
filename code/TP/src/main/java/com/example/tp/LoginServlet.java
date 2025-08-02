@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
                     if (producteur != null && producteur.getMotDePasse().equals(motDePasse)) {
                         session.setAttribute("utilisateur", producteur);
                         session.setAttribute("role", "producteur");
-                        resp.sendRedirect("accueil.jsp");
+                        resp.sendRedirect("dashboardProducteur.jsp");
                         return;
                     }
                 }
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
                     if (fournisseur != null && fournisseur.getMotDePasse().equals(motDePasse)) {
                         session.setAttribute("utilisateur", fournisseur);
                         session.setAttribute("role", "fournisseur");
-                        resp.sendRedirect("accueil.jsp");
+                        resp.sendRedirect("dashboardFournisseur.jsp");
                         return;
                     }
                 }
@@ -54,19 +54,21 @@ public class LoginServlet extends HttpServlet {
                     if (pdv != null && pdv.getMotDePasse().equals(motDePasse)) {
                         session.setAttribute("utilisateur", pdv);
                         session.setAttribute("role", "distributeur");
-                        resp.sendRedirect("accueil.jsp");
+                        resp.sendRedirect("dashboardPointDeVente.jsp");
                         return;
                     }
                 }
             }
 
+            // Si aucune condition n’a réussi, on affiche une erreur
+            req.setAttribute("erreur", "Courriel ou mot de passe incorrect.");
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+
         } catch (Exception e) {
             e.printStackTrace();
-
-            req.setAttribute("erreur", "Aucun compte ne correspond aux informations saisies.");
+            req.setAttribute("erreur", "Erreur lors de la connexion : " + e.getMessage());
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
-
     }
 
     @Override

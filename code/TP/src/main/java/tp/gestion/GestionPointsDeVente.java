@@ -25,7 +25,7 @@ public class GestionPointsDeVente {
         try {
             cx.demarreTransaction();
             // Vérifier si le point de vente existe déjà
-            if (pointsDeVente.chercherParNom(nom) != null) throw new Exception("Point de vente déjà existant.");
+            if (pointsDeVente.chercherParNom(nom) != null || pointsDeVente.chercherParCourriel(courriel) != null) throw new Exception("Point de vente déjà existant.");
             
             // Ajouter le point de vente
             pointsDeVente.ajouter(new PointDeVente(nom, courriel, motDePasse, adresse));
@@ -57,11 +57,21 @@ public class GestionPointsDeVente {
         try {
             cx.demarreTransaction();
 
-            // Vérifier si le point de vente existe
-            if (pointsDeVente.chercherParId(id) == null)
+            PointDeVente pdv = pointsDeVente.chercherParId(id);
+            if (pdv == null)
                 throw new Exception("Point de vente introuvable.");
 
-            // Supprimer le point de vente
+            for (Produit p : pdv.getProduits()) {
+                p.retirerPointDeVente(pdv);
+            }
+
+            for (Producteur prod : pdv.getProducteurs()) {
+                prod.getPointsDeVente().remove(pdv);
+            }
+
+            pdv.getProduits().clear();
+            pdv.getProducteurs().clear();
+
             pointsDeVente.supprimer(id);
 
             cx.commit();
@@ -117,6 +127,14 @@ public class GestionPointsDeVente {
         } catch (Exception e) {
             cx.rollback();
             throw e;
+        }
+    }
+
+    public PointDeVente chercherParId(int id) throws Exception {
+        try {
+            return pointsDeVente.chercherParId(id);
+        } catch (Exception e) {
+            throw new Exception("Erreur lors de la recherche par id", e);
         }
     }
 

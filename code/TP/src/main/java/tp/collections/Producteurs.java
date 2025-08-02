@@ -18,7 +18,8 @@ public class Producteurs {
     }
 
     public void ajouter(Producteur p) throws Exception {
-        if (em.find(Producteur.class, p.getNom()) != null)
+        Producteur existant = chercherParNom(p.getNom());
+        if (existant != null)
             throw new Exception("Ce producteur existe déjà.");
         em.persist(p);
     }
@@ -32,7 +33,7 @@ public class Producteurs {
             "SELECT p FROM Producteur p WHERE p.nom = :nom", Producteur.class);
         query.setParameter("nom", nom);
 
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public Producteur chercherParCourriel(String courriel) {
@@ -40,7 +41,7 @@ public class Producteurs {
             "SELECT p FROM Producteur p WHERE p.courriel = :courriel", Producteur.class);
         query.setParameter("courriel", courriel);
 
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     public List<Producteur> listerTous() {
