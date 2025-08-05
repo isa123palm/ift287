@@ -9,6 +9,12 @@ public class ApceInitializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        
+        if (sce.getServletContext().getAttribute("connexion") != null) {
+            System.out.println("[APCE] Connexion déjà initialisée dynamiquement");
+            return;
+        }
+        
         try {
             Connexion cx = new Connexion("objectdbPU");
             Apce.init(cx);

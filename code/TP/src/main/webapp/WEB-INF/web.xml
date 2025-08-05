@@ -220,8 +220,19 @@
     </servlet-mapping>
 
     <!-- Landing page -->
+    <servlet>
+        <servlet-name>InitConnexion</servlet-name>
+        <servlet-class>com.example.tp.InitConnexionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InitConnexion</servlet-name>
+        <url-pattern>/init_bd</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <!--<welcome-file>login.jsp</welcome-file>-->
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

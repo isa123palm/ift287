@@ -43,6 +43,10 @@
     <div class="card">
         <img src="res/logo_apce.png" alt="Logo APCE" class="logo mb-3">
 
+        <div class="text-center mt-3">
+            <a href="login.jsp">Déjà un compte?</a>
+        </div>
+
         <h4 class="mb-3">Créer un compte</h4>
 
         <% if (erreur != null) { %>
